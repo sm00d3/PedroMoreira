@@ -13,7 +13,7 @@ export class GeneralService {
     effect(() => {
       if (isPlatformBrowser(this.platformId)) {
         this.setToLocalStorage("DarkMode", this.darkMode());
-        (this.darkMode() == true) ? document.documentElement.classList.add("dark") : document.documentElement.classList.remove("dark")
+        document.documentElement.setAttribute("data-theme", (this.darkMode() == true) ? "pmDark" : "pmlight");
       }
     });
   }

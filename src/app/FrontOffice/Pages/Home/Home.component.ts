@@ -1,11 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, type OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { DividerComponent } from '../../Components/Divider/Divider.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
     CommonModule,
+    RouterLink,
+    DividerComponent
   ],
   templateUrl: './Home.component.html',
   styleUrl: './Home.component.css',
@@ -13,6 +17,6 @@ import { ChangeDetectionStrategy, Component, type OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  ngOnInit(): void { }
-
+  ngOnInit(): void {
+  }
 }

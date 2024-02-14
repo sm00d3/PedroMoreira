@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, HostBinding, effect, signal, type OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, type OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from '../../../FrontOffice/Components/Navbar/Navbar.component';
-import { GeneralService } from '../../../Global/General.service';
+import { FooterComponent } from '../../../FrontOffice/Components/Footer/Footer.component';
 
 @Component({
   selector: 'app-default-layout',
@@ -10,10 +10,11 @@ import { GeneralService } from '../../../Global/General.service';
   imports: [
     CommonModule,
     RouterOutlet,
-    NavbarComponent
+    NavbarComponent,
+    FooterComponent
   ],
   templateUrl: './DefaultLayout.component.html',
-  styleUrl: './DefaultLayout.component.css',
+  styles: '',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DefaultLayoutComponent implements OnInit {
