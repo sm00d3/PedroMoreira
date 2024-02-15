@@ -1,0 +1,27 @@
+<section class="py-28">
+  <div class="flex flex-col w-full">
+    <div class="divider divider-primary divider-start font-bold text-6xl">Projects</div>
+  </div>
+</section>
+<section class="flex flex-col">
+  <div class="flex flex-row w-full py-1">
+    <form action="#">
+      <label class="input input-sm rounded-full flex ring-2 ring-primary focus:ring-2 focus-visible:ring-2 focus-within:ring-2 focus:ring-primary focus-visible:ring-primary focus-within:ring-primary focus:outline-none focus-visible:outline-none focus-within:outline-none items-center gap-2">
+        <input type="text" class="grow bg-transparent text-primary placeholder:text-primary" placeholder="Search" />
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="w-4 h-4 fill-primary"><path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" /></svg>
+      </label>
+    </form>
+  </div>
+  <!-- Gallery -->
+  <div class="flex flex-col md:grid md:grid-cols-3 gap-3 mt-3">
+    @for ( proj of projects(); track proj.Id) {
+      <div data-id="{{ proj.Id }}" class="relative rounded overflow-hidden">
+        <img src="{{proj.Image}}" alt="{{proj.Name}}" class="w-full h-full">
+        <p class="cursor-pointer absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-2xl text-center text-white font-roboto font-medium group-hover:bg-opacity-60 transition">
+          {{proj.Name}}
+        </p>
+      </div>
+    }
+  </div>
+  <!-- End Gallery -->
+</section>
