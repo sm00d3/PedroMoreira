@@ -26,11 +26,12 @@ export class ProjectListComponent implements OnInit {
   public ngOnInit(): void {
     this.search.valueChanges.subscribe((value) => {
       var allValues = this.projectService.getProjects();
+
       if (value != "") {
-        allValues().map((v) => v.Name?.includes(value!) ?? v.Name);
-      } else {
-        this.projects = allValues;
+        allValues.set(allValues().filter((proj) => proj.Name?.toLowerCase().includes(value!.toLowerCase())));
       }
+
+      this.projects.set(allValues());
     });
   }
 
