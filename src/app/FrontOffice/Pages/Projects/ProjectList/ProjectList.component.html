@@ -1,8 +1,9 @@
-<section class="">
-  <div class="flex flex-col w-full py-20 md:py-32">
+<section class="pb-20 md:pb-32">
+  <div class="flex flex-col w-full">
     <div class="md:divider md:divider-primary divider-start font-bold text-4xl md:text-5xl">Projects</div>
   </div>
 </section>
+
 <section class="flex flex-col">
   <div class="flex flex-row w-full py-1">
     <form action="#">
@@ -12,16 +13,24 @@
       </label>
     </form>
   </div>
+
   <!-- Gallery -->
   <div class="flex flex-col md:grid md:grid-cols-3 gap-3 mt-3">
     @for ( proj of projects(); track proj.Id) {
-      <div data-id="{{ proj.Id }}" class="relative rounded overflow-hidden hover:ring-2 hover:ring-accent">
-        <img src="{{ proj.Image }}" alt="{{ proj.Name }}" class="w-full h-full">
-        <p class="cursor-pointer absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-2xl text-center text-white font-roboto font-medium group-hover:bg-opacity-60 transition">
-          {{proj.Name}}
-        </p>
+      <div class="relative rounded overflow-hidden">
+        <a [routerLink]="[proj.Id]">
+          <div class="mockup-browser border border-accent hover:border-primary">
+            <div class="mockup-browser-toolbar">
+              <div class="input">{{ proj.ProjectUrl }}</div>
+            </div>
+            <div class="flex justify-center">
+              <img src="https://dummyimage.com/600x400/a8a8a8/000000.jpg" alt="{{ proj.Name }}" class="w-full h-full">
+            </div>
+          </div>
+        </a>
       </div>
     }
   </div>
   <!-- End Gallery -->
+
 </section>

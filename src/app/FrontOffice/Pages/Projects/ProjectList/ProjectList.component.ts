@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
 import { ProjectService } from '../../../Services/Project.service';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Project } from '../../../Data/Project';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-project-list',
@@ -10,7 +10,8 @@ import { Project } from '../../../Data/Project';
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './ProjectList.component.html',
   styleUrl: './ProjectList.component.scss',
