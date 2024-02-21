@@ -1,15 +1,53 @@
-<section class="flex flex-col xl:flex-row">
+@if (project) {
+  <section class="flex flex-col xl:flex-row">
 
-  <!-- Carrousel -->
-  <div class="w-full xl:w-1/2 h-full">
-    <app-slide [slides]="slides"></app-slide>
-  </div>
-  <!-- End Carrousel -->
+    <!-- Carrousel -->
+    <div class="w-full xl:w-1/2 h-full">
+      <app-slide [slides]="project!.Images"></app-slide>
+    </div>
+    <!-- End Carrousel -->
 
-  <!-- Product Details-->
-  <div class="w-full xl:w-1/2 h-full p-3">
-    <h1>Hello World 2!</h1>
-  </div>
-  <!-- End Product Details-->
+    <!-- Product Details-->
+    <div class="w-full xl:w-1/2 h-full p-3">
+      <div class="relative flex py-5 items-center">
+        <h1 class="flex-shrink mr-4 text-4xl font-extrabold">{{ project.Name }}</h1>
+        <div class="flex-grow border-t border-primary"></div>
+      </div>
+      <div class="flex flex-col md:flex-row px-3 pb-3">
+        <div class=" flex items-center w-full md:w-2/4">
 
-</section>
+          <h6 class="font-semibold text-lg mr-1">Company:</h6>
+          <span class="font-normal">{{ project.Company }}</span>
+
+        </div>
+        <div class="flex items-center w-full md:w-2/4 md:justify-end">
+
+          <h6 class="font-semibold text-lg mr-1">From</h6>
+          <span class="font-normal">{{ project.StartDate|date: "MM/y" }}</span>
+
+          <h6 class="font-semibold text-lg mx-1">To</h6>
+          <span class="font-normal">{{ project.EndDate|date: "MM/y" }}</span>
+
+        </div>
+      </div>
+      <div class="px-3">
+        {{project.Description}}
+      </div>
+
+      @if (project.Stack.length > 0) {
+        <div class="px-3">
+          <div class="relative flex py-5 items-center">
+            <h1 class="flex-shrink mr-4 text-2xl font-bold">Project Stack</h1>
+          </div>
+          <div class="flex flex-wrap">
+            @for ( stack of project.Stack; track stack) {
+              <div class="badge badge-outline badge-lg m-1 w-50 font-semibold">{{ stack }}</div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+    <!-- End Product Details-->
+
+  </section>
+}

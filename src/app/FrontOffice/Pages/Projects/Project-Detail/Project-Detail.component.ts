@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import { SlideComponent } from '../../../Components/Slide/Slide.component';
-import { SlideInterface } from '../../../Data/Slide/SlideInterface';
+import { ProjectService } from '../../../Services/Project.service';
+import { ProjectInterface } from '../../../Data/Project/ProjectInterface';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-project-detail',
@@ -11,21 +13,25 @@ import { SlideInterface } from '../../../Data/Slide/SlideInterface';
     SlideComponent
   ],
   templateUrl: './Project-Detail.component.html',
-  styleUrl: './Project-Detail.component.scss',
+  styles: "",
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProjectDetailComponent {
+export class ProjectDetailComponent implements OnInit {
 
-  slides: SlideInterface[] = [
-    // { Id: 1, Url: "https://dummyimage.com/600x500/000/fff", Title: "Example1" },
-    { Id: 1, Url: "https://dummyimage.com/600x400/a8a8a8/000000.jpg", Title: "Example1" },
-    { Id: 2, Url: "https://dummyimage.com/600x400/a8a8a8/000&text=Example2", Title: "Example2" },
-    { Id: 3, Url: "https://dummyimage.com/600x400/a8a8a8/000&text=Example3", Title: "Example3" },
-    { Id: 4, Url: "https://dummyimage.com/600x400/a8a8a8/000&text=Example4", Title: "Example4" },
-    { Id: 5, Url: "https://dummyimage.com/600x400/a8a8a8/000&text=Example5", Title: "Example5" },
-    { Id: 6, Url: "https://dummyimage.com/600x400/a8a8a8/000&text=Example6", Title: "Example6" },
-    { Id: 7, Url: "https://dummyimage.com/600x400/a8a8a8/000&text=Example7", Title: "Example7" },
-    { Id: 8, Url: "https://dummyimage.com/600x400/a8a8a8/000&text=Example8", Title: "Example8" }
-  ];
+  project: ProjectInterface | null | undefined;
+
+  constructor(
+    private projectService: ProjectService,
+    private activeRoute: ActivatedRoute,
+    private router: Router,
+  ) { }
+
+  ngOnInit() {
+    let Id = this.activeRoute.snapshot.paramMap.get("id");
+    this.project = this.projectService.getProjectById(Number(Id) ?? -1) ?? null;
+    if (this.project == null) {
+      this.router.navigateByUrl("/projects")
+    }
+  }
 
 }
