@@ -1,0 +1,6 @@
+@PedroMoreira.API_HostAddress = http://localhost:5133
+
+GET {{PedroMoreira.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
