@@ -1,36 +1,37 @@
-<section class="pb-20 md:pb-24">
+<section class="py-10">
   <div class="flex flex-col w-full">
     <div class="md:divider md:divider-primary divider-start font-bold text-4xl md:text-5xl">Projects</div>
   </div>
 </section>
 
-<section class="flex flex-col">
-  <div class="flex flex-row w-full py-1">
-    <form action="#">
-      <label class="input input-sm rounded-full flex ring-2 ring-primary focus:ring-2 focus-visible:ring-2 focus-within:ring-2 focus:ring-primary focus-visible:ring-primary focus-within:ring-primary focus:outline-none focus-visible:outline-none focus-within:outline-none items-center gap-2">
-        <input type="text" class="grow bg-transparent text-primary placeholder:text-primary" placeholder="Search" [formControl]="search" />
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="w-4 h-4 fill-primary"><path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" /></svg>
-      </label>
-    </form>
-  </div>
+<div class="py-12">
+  <section class="flex flex-col">
+    <div class="flex flex-row w-full py-1">
+      <form action="#">
+        <label class="input input-sm rounded-full flex ring-2 ring-primary focus:ring-2 focus-visible:ring-2 focus-within:ring-2 focus:ring-primary focus-visible:ring-primary focus-within:ring-primary focus:outline-none focus-visible:outline-none focus-within:outline-none items-center gap-2">
+          <input type="text" class="grow bg-transparent text-primary placeholder:text-primary" placeholder="Search" [formControl]="search" />
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="w-4 h-4 fill-primary"><path fill-rule="evenodd" d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z" clip-rule="evenodd" /></svg>
+        </label>
+      </form>
+    </div>
 
-  <!-- Gallery -->
-  <div class="flex flex-col md:grid md:grid-cols-3 gap-3 mt-3">
-    @for ( proj of projects(); track proj.Id) {
-      <div class="relative rounded overflow-hidden">
-        <a [routerLink]="[proj.Id]">
-          <div class="mockup-browser border border-accent hover:border-primary">
-            <div class="mockup-browser-toolbar">
-              <div class="input">{{ proj.ProjectUrl }}</div>
+    <!-- Gallery -->
+    <div class="flex flex-col lg:grid lg:grid-cols-3 gap-3 mt-3">
+      @for ( proj of projects(); track proj.Id) {
+        <div class="relative rounded overflow-hidden">
+          <a [routerLink]="[proj.Id]">
+            <div class="mockup-browser border border-accent hover:border-primary">
+              <div class="mockup-browser-toolbar">
+                <div class="input">{{ proj.ProjectUrl }}</div>
+              </div>
+              <div class="flex justify-center">
+                <img src="https://dummyimage.com/600x400/a8a8a8/000000.jpg" alt="{{ proj.Name }}" class="w-full h-full">
+              </div>
             </div>
-            <div class="flex justify-center">
-              <img src="https://dummyimage.com/600x400/a8a8a8/000000.jpg" alt="{{ proj.Name }}" class="w-full h-full">
-            </div>
-          </div>
-        </a>
-      </div>
-    }
-  </div>
-  <!-- End Gallery -->
-
-</section>
+          </a>
+        </div>
+      }
+    </div>
+    <!-- End Gallery -->
+  </section>
+</div>
