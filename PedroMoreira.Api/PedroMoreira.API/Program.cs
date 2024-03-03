@@ -1,4 +1,4 @@
-using PedroMoreira.API.Extension;
+using PedroMoreira.Infrastructure;
 
 namespace PedroMoreira.API
 {
@@ -8,11 +8,7 @@ namespace PedroMoreira.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddAuthentication();
-
-            builder.Services.AddDatabase(builder.Configuration);
-
-            builder.Services.AddIdentityAuth(builder.Configuration);
+            builder.Services.AddInfrastructure(builder.Configuration);
 
             builder.Services.AddControllers();
 
@@ -30,10 +26,8 @@ namespace PedroMoreira.API
             }
 
             app.UseHttpsRedirection();
-
             app.UseAuthentication();
             app.UseAuthorization();
-
             app.MapControllers();
 
             app.Run();

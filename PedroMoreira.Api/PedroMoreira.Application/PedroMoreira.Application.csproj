@@ -10,4 +10,9 @@
     <Folder Include="Services\Auth\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PedroMoreira.Domain\PedroMoreira.Domain.csproj" />
+    <ProjectReference Include="..\PedroMoreira.Infrastructure\PedroMoreira.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
