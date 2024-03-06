@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PedroMoreira.Application\PedroMoreira.Application.csproj" />
+    <ProjectReference Include="..\PedroMoreira.Contracts\PedroMoreira.Contracts.csproj" />
     <ProjectReference Include="..\PedroMoreira.Infrastructure\PedroMoreira.Infrastructure.csproj" />
   </ItemGroup>
 

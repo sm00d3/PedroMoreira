@@ -22,6 +22,11 @@
     <PackageReference Include="Microsoft.Identity.Web.DownstreamApi" Version="2.17.1" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.2" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.Design" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PedroMoreira.Application\PedroMoreira.Application.csproj" />
   </ItemGroup>
 
 </Project>
