@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ErrorOr;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Options;
@@ -92,6 +94,15 @@ namespace PedroMoreira.API.Common.Errors
             {
                 problemDetails.Extensions["traceId"] = traceId;
             }
+
+            // Add a List of Errors
+            var errors = httpContext?.Items["errors"] as List<Error>;
+
+            if (errors is not null) 
+            {
+                problemDetails.Extensions.TryAdd("ErrorCodes", errors.Skip(1).Select(e => e.Code));
+            }
+
 
             _configure?.Invoke(new() { HttpContext = httpContext!, ProblemDetails = problemDetails });
         }

@@ -8,14 +8,20 @@ namespace PedroMoreira.API.Controllers
     [ApiController]
     public class ErrorController : ApiController
     {
-
+        ErrorController(ILogger<ErrorController> logger) : base(logger) { }
+        
         [HttpGet("/error")]
         public IActionResult Error()
         {
-            //TODO: Add Logging
             Exception? exception = HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
 
-            return Problem(statusCode: StatusCodes.Status500InternalServerError, title: "An error occurred during the process.");
+            this._logger.LogError(exception?.Message, exception);
+
+            return Problem(
+                type: exception?.GetType().ToString(),
+                statusCode: StatusCodes.Status500InternalServerError, 
+                title: "An Internal error occurred during the process."
+            );
         }
     }
 }

@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Auth\" />
+    <Folder Include="Services\Auth\Command\" />
+    <Folder Include="Services\Auth\Query\" />
   </ItemGroup>
 
   <ItemGroup>

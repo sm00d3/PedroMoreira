@@ -7,9 +7,13 @@ namespace PedroMoreira.API.Controllers
     [ApiController]
     public class ApiController : ControllerBase
     {
+        protected readonly ILogger _logger;
+
+        public ApiController(ILogger logger) { _logger = logger; }
 
         protected IActionResult Problem(List<Error> errors)
         {
+            HttpContext.Items.TryAdd("Errors", errors);
 
             var firstError = errors.FirstOrDefault();
 

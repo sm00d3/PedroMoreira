@@ -8,6 +8,7 @@ namespace PedroMoreira.API.Controllers
     [ApiController]
     public class AuthenticationController : ApiController
     {
+        AuthenticationController(ILogger<AuthenticationController> logger) : base(logger) { }
 
         [HttpGet("/signin")]
         public IActionResult Login(LoginRequest request)

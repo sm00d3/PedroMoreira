@@ -7,15 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Authentication\Common\Errors\Errors.Authentication.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <EditorConfigFiles Remove="E:\Projects\PedroMoreira\PedroMoreira.Api\PedroMoreira.Domain\.editorconfig" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Authentication\Common\Errors\Errors.Authentication.cs" />
     <None Include="E:\Projects\PedroMoreira\PedroMoreira.Api\PedroMoreira.Domain\.editorconfig" />
   </ItemGroup>
 

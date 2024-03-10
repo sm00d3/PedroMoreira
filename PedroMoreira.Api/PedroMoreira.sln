@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PedroMoreira.Domain", "Pedr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PedroMoreira.Application", "PedroMoreira.Application\PedroMoreira.Application.csproj", "{D957D0EF-7114-4FFE-AFA7-CDA5BB73A014}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PedroMoreira.Contracts", "PedroMoreira.Contracts\PedroMoreira.Contracts.csproj", "{8BE6E692-A0A3-421E-9D46-970D420D85D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PedroMoreira.Contracts", "PedroMoreira.Contracts\PedroMoreira.Contracts.csproj", "{8BE6E692-A0A3-421E-9D46-970D420D85D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
