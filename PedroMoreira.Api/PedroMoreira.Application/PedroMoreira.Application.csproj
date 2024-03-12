@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Auth\Command\" />
-    <Folder Include="Services\Auth\Query\" />
+    <Folder Include="Services\Authentication\Query\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.2.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
   </ItemGroup>
