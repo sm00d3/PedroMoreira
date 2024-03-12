@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PedroMoreira.Application", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PedroMoreira.Contracts", "PedroMoreira.Contracts\PedroMoreira.Contracts.csproj", "{8BE6E692-A0A3-421E-9D46-970D420D85D9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{5C805BD9-1A57-452F-8E92-C2634BF57C18}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FB8F5280-1271-441F-8055-69234B8F2335} = {5C805BD9-1A57-452F-8E92-C2634BF57C18}
+		{8BE6E692-A0A3-421E-9D46-970D420D85D9} = {5C805BD9-1A57-452F-8E92-C2634BF57C18}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {270A78C4-2954-4BB5-9E76-28693BA96F8D}
