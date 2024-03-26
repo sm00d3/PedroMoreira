@@ -1,8 +1,8 @@
-﻿
-namespace PedroMoreira.Contracts.Authentication
+﻿namespace PedroMoreira.Contracts.Authentication
 {
     public record LoginRequest(
         string Email,
-        string Passwod
-     );
+        string Password,
+        string? TwoFactorCode,
+        string? TwoFactorRecoveryCode);
 }

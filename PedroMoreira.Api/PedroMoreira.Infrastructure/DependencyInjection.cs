@@ -1,69 +1,66 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
 using PedroMoreira.Application.Common.Interfaces;
-using PedroMoreira.Domain.Authentication.Entity;
-using PedroMoreira.Infrastructure.Authentication;
 using PedroMoreira.Infrastructure.Persistence;
-using System.Text;
+using PedroMoreira.Infrastructure.Services;
+using PedroMoreira.Domain.Entities.Authentication;
+using PedroMoreira.Infrastructure.Settings.Token;
+using PedroMoreira.Infrastructure.Security.ValidationToken;
+using PedroMoreira.Application.Common.Interfaces.Persistence;
 
 namespace PedroMoreira.Infrastructure
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfigurationManager config)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration config)
         {
-
-            services.AddAuth(config);
-            services.AddDbContext<PostgresContext>(o => o.UseNpgsql(config.GetConnectionString("PmDatabase")));
-
-            services.AddSingleton<IJwtTokenGen, JwtTokenGen>();
+            services
+                .AddSettings(config)
+                .AddServices()
+                .AddPersistence(config)
+                .AddAuthentication(config);
 
             return services;
         }
 
-        public static IServiceCollection AddAuth(this IServiceCollection services, IConfigurationManager config) 
+        public static IServiceCollection AddServices(this IServiceCollection services)
         {
-            var JwtValidationParams = new TokenValidationParameters
-            {
-                ValidateAudience = true,
-                ValidateIssuer = true,
-                ValidateIssuerSigningKey = true,
+            services.AddSingleton<IDateTImeProvider, SystemDateTimeProvider>();
+            services.AddSingleton<IAuthTokenGeneratorService, AuthTokenGeneratorService>();
 
-                // TODO: Ajustar isto Add Options pattern and e Add validação
-                ValidAudience = config["JwtOptions:Audience"] ?? throw new InvalidOperationException("JWT Audience not Configured."),
-                ValidIssuer = config["JwtOptions:Issuer"] ?? throw new InvalidOperationException("JWT Issuer not Configured."),
-                RequireExpirationTime = config.GetSection("JwtOptions").GetValue<bool>("HasExpirationTime"),
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["JwtOptions:IssuerSigningKey"] ?? throw new InvalidOperationException("JWT Secret not Configured."))),
-                ValidateLifetime = false
-            };
+            return services;
+        }
 
-            services.AddSingleton(JwtValidationParams);
+        public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration manager)
+        {
+            services.AddDbContext<PostgresContext>(o => o.UseNpgsql(manager.GetConnectionString("PmDatabase")));
+            services.AddScoped<IUnitofWork, UnitofWork>();
+
+            // Repositories goes here
 
 
-            services.AddIdentity<User, IdentityRole>(identity =>
-            {
-                identity.Password.RequiredLength = 8;
-                identity.Password.RequireLowercase = true;
-                identity.Password.RequireUppercase = true;
-                identity.Password.RequireDigit = true;
-                identity.User.RequireUniqueEmail = true;
+            return services;
+        }
 
-            }).AddEntityFrameworkStores<PostgresContext>()
-              .AddDefaultTokenProviders();
+        public static IServiceCollection AddAuthentication(this IServiceCollection services, IConfiguration config) 
+        {
+            services
+                .AddAuthentication(defaultScheme: JwtBearerDefaults.AuthenticationScheme)
+                .AddBearerToken();
 
-            services.AddAuthentication( o =>
-            {
-                o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            return services;
+        }
 
-            }).AddJwtBearer( o =>
-            {
-                o.TokenValidationParameters = JwtValidationParams;
-            });
+        public static IServiceCollection AddSettings(this IServiceCollection services, IConfiguration Config)
+        {
+            services
+                .AddOptions<TokenSettings>(
+                    Config.GetSection(TokenSettings.Name).Value);
+
+            services
+                .ConfigureOptions<BearerTokenValidationConfiguration>();
 
             return services;
         }

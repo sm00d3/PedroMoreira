@@ -1,38 +1,61 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using PedroMoreira.API.Controllers.Common;
+using PedroMoreira.Application.Services.Authentication.Command;
+using PedroMoreira.Application.Services.Authentication.Query;
 using PedroMoreira.Contracts.Authentication;
-using PedroMoreira.Domain.Authentication.Entity;
-using System.Net;
 
 namespace PedroMoreira.API.Controllers
 {
-    [Route("/auth")]
-    [ApiController]
+    [Route("Auth")]
     public class AuthenticationController : ApiController
     {
-        private readonly SignInManager<User> _signInManager;
+        public AuthenticationController(ILogger logger, ISender sender) : base(logger, sender) { }
 
-        AuthenticationController(ILogger<AuthenticationController> logger, SignInManager<User> signInManager) : base(logger)
+        [HttpPost("signup")]
+        public async Task<IActionResult> Register(RegisterRequest request)
         {
-            _signInManager = signInManager;
+            var command = new RegisterCommand(
+                request.FirstName,
+                request.LastName,
+                request.Email,
+                request.Password);
+
+            var result = await _sender.Send(command);
+
+            return result.Match(
+                data => Ok(data),
+                error => Problem(error));
         }
 
-        [HttpGet("/signin")]
-        public IActionResult Login(LoginRequest request)
+        [HttpPost("signon")]
+        public async Task<IActionResult> Login(LoginRequest request)
         {
-            return Ok("Nice") ;
+
+            var command = new LoginQuery(
+                request.Email,
+                request.Password,
+                request.TwoFactorCode,
+                request.TwoFactorRecoveryCode);
+
+            var result = await _sender.Send(command);
+
+            return result.Match(
+                data => Ok(data),
+                error => Problem(error));
         }
 
-        [HttpPost("/signup")]
-        public IActionResult Register(ResgisterRequest request)
+        [HttpPost("signout")]
+        public async Task<IActionResult> Logout()
         {
-            return Ok("Nice");
+            return Ok();
         }
 
-        [HttpGet("/signout")]
-        public async Task Logout()
+        [HttpGet("reset-password")]
+        public async Task<IActionResult> ResetPassword(string email)
         {
-            await _signInManager.SignOutAsync();
+            return Ok();
         }
+
     }
 }
