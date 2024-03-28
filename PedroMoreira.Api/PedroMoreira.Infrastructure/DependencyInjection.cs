@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using PedroMoreira.Application.Common.Interfaces;
 using PedroMoreira.Infrastructure.Persistence;
 using PedroMoreira.Infrastructure.Services;
-using PedroMoreira.Domain.Entities.Authentication;
 using PedroMoreira.Infrastructure.Settings.Token;
 using PedroMoreira.Infrastructure.Security.ValidationToken;
 using PedroMoreira.Application.Common.Interfaces.Persistence;
@@ -20,7 +19,8 @@ namespace PedroMoreira.Infrastructure
                 .AddSettings(config)
                 .AddServices()
                 .AddPersistence(config)
-                .AddAuthentication(config);
+                .AddAuthentication(config)
+                .AddAuthorization();
 
             return services;
         }

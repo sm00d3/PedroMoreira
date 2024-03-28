@@ -12,19 +12,13 @@ namespace PedroMoreira.Application.Services.Authentication.Query
     internal class LoginQueryHandler : IRequestHandler<LoginQuery, ErrorOr<AccessTokenResponse>>
     {
         private readonly ILogger<LoginQueryHandler> _logger;
-        private readonly SignInManager<Member> _signManager;
-        private readonly UserManager<Member> _userManager;
         private readonly IAuthTokenGeneratorService _tokenGeneratorService;
 
         public LoginQueryHandler(
             ILogger<LoginQueryHandler> logger,
-            UserManager<Member> userManager,
-            SignInManager<Member> signManager,
             IAuthTokenGeneratorService tokenGeneratorService)
         {
             _logger = logger;
-            _userManager = userManager;
-            _signManager = signManager;
             _tokenGeneratorService = tokenGeneratorService;
         }
 

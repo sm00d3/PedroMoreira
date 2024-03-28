@@ -2,14 +2,14 @@
 using PedroMoreira.Domain.Core.Primitives;
 using PedroMoreira.Domain.Entities.Members;
 using PedroMoreira.Domain.Entities.Projects;
+using System.ComponentModel.DataAnnotations;
 
 namespace PedroMoreira.Domain.Entities.Authentication
 {
     public class ProjectSecurity : Entity, IAuditableEntity
     {
-
         public Guid ProjectId { get; set; }
-        
+
         public Guid MemberId { get; set; }
 
         public DateTime CreatedOnUtc { get; }

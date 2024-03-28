@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PedroMoreira.Infrastructure.Security.ValidationToken
 {
-    public sealed class BearerTokenValidationConfiguration(IOptions<TokenSettings> Settings) 
+    internal sealed class BearerTokenValidationConfiguration(IOptions<TokenSettings> Settings) 
         : IConfigureNamedOptions<JwtBearerOptions>
     {
         private readonly TokenSettings _settings = Settings.Value;

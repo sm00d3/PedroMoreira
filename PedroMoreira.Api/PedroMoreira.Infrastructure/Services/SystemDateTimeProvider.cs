@@ -2,7 +2,7 @@
 
 namespace PedroMoreira.Infrastructure.Services
 {
-    public class SystemDateTimeProvider : IDateTImeProvider
+    internal sealed class SystemDateTimeProvider : IDateTImeProvider
     {
         public DateTime UtcNow => DateTime.UtcNow;
     }

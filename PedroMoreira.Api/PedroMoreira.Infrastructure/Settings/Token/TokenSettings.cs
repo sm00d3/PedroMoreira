@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace PedroMoreira.Infrastructure.Settings.Token
 {
-    public class TokenSettings
+    internal sealed class TokenSettings
     {
         public const string Name = nameof(TokenSettings);
 

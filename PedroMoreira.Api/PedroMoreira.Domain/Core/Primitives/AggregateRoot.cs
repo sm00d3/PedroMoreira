@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PedroMoreira.Domain.Core.Primitives
+﻿namespace PedroMoreira.Domain.Core.Primitives
 {
-    public abstract class AggregateRoot
+    public abstract class AggregateRoot : Entity
     {
+        protected AggregateRoot(Guid id) : base(id) { }
+
+        protected AggregateRoot() { }
+
     }
 }
